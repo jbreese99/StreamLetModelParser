@@ -1,11 +1,18 @@
-<div *ngFor = "let card of contents">
-  <ul>
-    <li>Title: {{card.getTitle()}}</li>
-    <li>Year: {{card.getYear()}}</li>
-    <li>Runtime: {{card.getRuntime()}}</li>
-    <li>Overview: {{card.getDescript()}}</li>
-    <li>Genres: {{card.getGenres()}}</li>
-    <li>Cast: {{card.getCast()}}</li>
-    <li>Poster: {{card.getPoster()}}</li>
-  </ul>
-</div>
+<span ng-init="getNewReleases()">
+  <div *ngFor = "let card of contents">
+    <ul>
+      <li>Title: {{card.getTitle()}}</li>
+      <li>Year: {{card.getYear()}}</li>
+      <li>Runtime: {{card.getRuntime()}}</li>
+      <li>Overview: {{card.getDescript()}}</li>
+      <li>Genres: {{card.getGenres()}}</li>
+      <li>Cast: {{card.getCast()}}</li>
+      <li>Poster: {{card.getPoster()}}</li>
+    </ul>
+  </div>
+</span>
+
+
+<button (click)="getComedies()">COMEDIES</button>
+
+

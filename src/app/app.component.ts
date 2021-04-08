@@ -14,7 +14,36 @@ export class AppComponent {
   contents = [];
   card = null;
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient){}
+  
+  getNewReleases(){
+    console.log("HERE");
+    this.http.get('http://localhost:9091/searchQuery?title=The Lord of the Rings: The Fellowship of the Ring').toPromise().then(
+      data => {
+        // this.comedyCards = [];
+        // this.categories = {};
+        // for(var x in data){
+        //   var content = data[x];
+        //   let card = new Card(content);
+        //   console.log(card);
+        //   if (card.getGenres().indexOf("comedy")>-1){
+        //     this.comedyCards.push(card);
+        //     console.log("added!");
+        //   }
+        // }
+        // this.categories.comedyCards = this.comedyCards;
+
+        var parsedData = JSON.parse(JSON.stringify(data));
+        for(var i = 0; i < parsedData.length; i++){
+          var obj = parsedData[i];
+          let card = new Card(obj);
+          console.log(card);
+        this.contents.push(card);
+        }
+      }
+    );
+  }
+  getComedies(){
     this.http.get('http://localhost:9091/searchQuery?title=batman').toPromise().then(
       data => {
         // this.comedyCards = [];
@@ -40,5 +69,4 @@ export class AppComponent {
       }
     );
   }
-
 }
