@@ -9,25 +9,34 @@ import { Card } from './models/card.model';
 })
 export class AppComponent {
   title = 'StreamLetModelsFrontEnd';
-  content = [];
+  // comedyCards = null;
+  // categories = null;
+  contents = [];
   card = null;
 
   constructor(private http: HttpClient){
-    this.http.get('http://localhost:9091/searchQuery?title=talladega').toPromise().then(
+    this.http.get('http://localhost:9091/searchQuery?title=batman').toPromise().then(
       data => {
-        
+        // this.comedyCards = [];
+        // this.categories = {};
+        // for(var x in data){
+        //   var content = data[x];
+        //   let card = new Card(content);
+        //   console.log(card);
+        //   if (card.getGenres().indexOf("comedy")>-1){
+        //     this.comedyCards.push(card);
+        //     console.log("added!");
+        //   }
+        // }
+        // this.categories.comedyCards = this.comedyCards;
 
-
-
-
-
-
-
-
-        let card = new Card(data);
-        console.log(card);
-
-        this.content.push(card);
+        var parsedData = JSON.parse(JSON.stringify(data));
+        for(var i = 0; i < parsedData.length; i++){
+          var obj = parsedData[i];
+          let card = new Card(obj);
+          console.log(card);
+        this.contents.push(card);
+        }
       }
     );
   }
